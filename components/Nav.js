@@ -1,8 +1,12 @@
+import Link from "next/link";
+
 const Nav = () => {
   return (
     <nav className="bg-blue-500 text-white text-wihte flex justify-around">
-      <h1 className="py-3 ">Home</h1>
-      <ul className="py-3 ">
+      <Link href="/" passHref>
+        <h1 className="py-4 ">Home</h1>
+      </Link>
+      <ul className="py-4 ">
         <li> Q&A</li>
       </ul>
     </nav>
