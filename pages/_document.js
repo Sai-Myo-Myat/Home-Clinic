@@ -3,7 +3,12 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html>
-      <Head />
+      <Head>
+        <script
+          src="https://kit.fontawesome.com/b25adae401.js"
+          crossorigin="anonymous"
+        ></script>
+      </Head>
       <body>
         <Main />
         <NextScript />

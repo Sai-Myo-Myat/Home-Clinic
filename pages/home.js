@@ -10,7 +10,7 @@ const Home = () => {
           app for you.
         </p>
       </div>
-      <Link href="/booking" passHref>
+      <Link href="/booking/appointment" passHref>
         <button className="bg-blue-500 p-3 rounded mt-20 active:p-2">
           Booking Section
         </button>
