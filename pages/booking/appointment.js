@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
+//importing components
+import { contextProvider } from "../../components/context";
 
 const initialTypes = [
   { name: "Genearl", select: false, id: 1 },
@@ -14,7 +16,7 @@ const reducer = (state, action) => {
         if (choose.id === action.id) {
           return { ...choose, select: !choose.select };
         } else {
-          return choose;
+          return { ...choose, select: false };
         }
       });
       break;
@@ -26,9 +28,14 @@ const reducer = (state, action) => {
 
 const Appointment = () => {
   const [types, dispatch] = useReducer(reducer, initialTypes);
+  const [allInformation, setAllInformation] = useContext(contextProvider);
 
-  const selected = (type) => {
-    dispatch({ change: "change", id: type.id });
+  const handleType = () => {
+    types.map((type) => {
+      if (type.select === true) {
+        setAllInformation((prev) => ({ ...prev, type: type.name }));
+      }
+    });
   };
 
   return (
@@ -43,16 +50,25 @@ const Appointment = () => {
           <div
             className="position-relative"
             key={index}
-            onClick={selected(type)}
+            onClick={() => {
+              dispatch({ change: "change", id: type.id });
+            }}
           >
-            <div className=" bg-blue-200 text-blue-500 p-2 rounded">
+            <div
+              className={`cursor-pointer text-blue-500 p-2 rounded ${
+                type.select ? "bg-blue-500 text-white" : "bg-blue-200 "
+              }`}
+            >
               <h3>{type.name}</h3>
             </div>
           </div>
         ))}
       </div>
       <Link href="/booking/form" passHref>
-        <button className="text-blue-500 font-bold text-2xl rounded mt-20 ">
+        <button
+          onClick={handleType}
+          className="text-blue-500 font-bold text-2xl rounded mt-20 "
+        >
           next➯
         </button>
       </Link>
