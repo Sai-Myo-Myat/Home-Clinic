@@ -16,7 +16,8 @@ const reducer = (state, { name, value, type }) => {
 };
 
 const Form = () => {
-  const [database, setDatabase] = useContext(mainContextProvider);
+  const [database, setDatabase, number, setNumber] =
+    useContext(mainContextProvider);
   const [allInformation, setAllInformation] = useContext(contextProvider);
   const [datas, dispatch] = useReducer(reducer, initialDatas);
 
@@ -38,7 +39,6 @@ const Form = () => {
 
   return (
     <div className="h-full flex justify-center items-center">
-      {/* <Stepper /> */}
       <form className="w-50">
         <div className="form-group mb-3 text-white">
           <label htmlFor="exampleInputEmail1 ">Name</label>
