@@ -40,7 +40,7 @@ const Form = () => {
 
         const [hour, minute] = hourAndMinute;
         console.log("hour:", hour, "minutes", minute);
-        minute < 10 ? (minute = minute[1]) : minute; //to be appear correctly
+        //minute < 10 ? (minute = minute[1]) : minute; //to be appear correctly
         const dates = datas.date.split("-");
         const [year, month, day] = dates;
         console.log("dates", dates);
@@ -69,7 +69,8 @@ const Form = () => {
       console.log("bookingTimes", bookingTimes);
 
       bookingTimes.map((booking) => {
-        const extraMinutes = booking.setMinutes(booking.getMinutes() + 10);
+        // const extraMinutes = booking;
+        // extraMinutes.setMinutes(extraMinutes.getMinutes() + 10);
         if (booking.getTime() === bookingTime.getTime()) {
           alert("this time is not available!");
           refOne.current = false;
