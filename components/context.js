@@ -5,11 +5,8 @@ export const contextProvider = createContext();
 
 export const ContextContainer = (props) => {
   const [allInformation, setAllInformation] = useState({});
-  const [number, setNumber] = useState(0);
   return (
-    <contextProvider.Provider
-      value={[allInformation, setAllInformation, number, setNumber]}
-    >
+    <contextProvider.Provider value={[allInformation, setAllInformation]}>
       {props.children}
     </contextProvider.Provider>
   );

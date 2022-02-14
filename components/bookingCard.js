@@ -4,19 +4,11 @@ import { mainContextProvider } from "./dataBase";
 
 const BookingCard = ({ booking }) => {
   const [database, setDatabase] = useContext(mainContextProvider);
-  const bookingTime = new Date(
-    booking.year,
-    booking.month - 1,
-    booking.day,
-    booking.hour,
-    booking.minute
-  );
-  console.log(bookingTime);
 
   const cancelFun = () => {
     const currentTime = new Date();
     currentTime.setDate(currentTime.getDate() + 1);
-    if (currentTime.getTime() < bookingTime.getTime()) {
+    if (currentTime.getTime() < booking.bookingTime.getTime()) {
       alert("Cancel Now!");
       setDatabase(() => {
         return database.filter((element) => element.id !== booking.id);

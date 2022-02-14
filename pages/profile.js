@@ -10,7 +10,6 @@ const Profile = () => {
   console.log(database);
 
   useEffect(() => {
-    console.log(Object.entries(allInformation).length);
     if (Object.entries(allInformation).length > 2) {
       setDatabase((prev) => [...prev, allInformation]);
     }

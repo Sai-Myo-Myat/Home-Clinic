@@ -1,8 +1,9 @@
-import { useReducer, useContext, useEffect, useRef } from "react";
+import { useReducer, useContext, useRef } from "react";
 import Link from "next/link";
 //importing components
 import { mainContextProvider } from "../../components/dataBase";
 import { contextProvider } from "../../components/context";
+import { bookingTimesContext } from "../../components/bookingTimes";
 const initialDatas = {};
 
 const reducer = (state, { name, value, type }) => {
@@ -18,9 +19,10 @@ const reducer = (state, { name, value, type }) => {
 
 const Form = () => {
   const [database, setDatabase] = useContext(mainContextProvider);
-  const [allInformation, setAllInformation, number, setNumber] =
-    useContext(contextProvider);
+  const [allInformation, setAllInformation] = useContext(contextProvider);
+  const [bookingTimes, setBookingTimes] = useContext(bookingTimesContext);
   const [datas, dispatch] = useReducer(reducer, initialDatas);
+  const refOne = useRef(true);
 
   const makeChange = (e) => {
     dispatch({
@@ -35,13 +37,15 @@ const Form = () => {
       if (datas.time) {
         const meridian = "";
         const hourAndMinute = datas.time.split(":");
+
         const [hour, minute] = hourAndMinute;
+        console.log("hour:", hour, "minutes", minute);
+        minute < 10 ? (minute = minute[1]) : minute; //to be appear correctly
         const dates = datas.date.split("-");
         const [year, month, day] = dates;
         console.log("dates", dates);
         if (hour > 12) {
           meridian = "PM";
-          hour -= 12;
         } else if (hour < 12) {
           meridian = "AM";
           if (hour === 0) {
@@ -53,17 +57,37 @@ const Form = () => {
         }
       }
 
-      return {
-        ...prev,
-        ...datas,
-        meridian,
-        hour,
-        minute,
-        year,
-        month,
-        day,
-        id,
-      };
+      const bookingTime = new Date(year, month - 1, day, hour, minute);
+
+      const currentTime = new Date();
+      if (bookingTime.getTime() < currentTime.getTime()) {
+        alert("it's now ");
+        return allInformation;
+      }
+
+      setBookingTimes((prev) => [...prev, bookingTime]);
+      console.log("bookingTimes", bookingTimes);
+
+      bookingTimes.map((booking) => {
+        const extraMinutes = booking.setMinutes(booking.getMinutes() + 10);
+        if (booking.getTime() === bookingTime.getTime()) {
+          alert("this time is not available!");
+          refOne.current = false;
+          setAllInformation(allInformation);
+        } else {
+          refOne.current = true;
+        }
+      });
+
+      if (refOne.current === true) {
+        return {
+          ...prev,
+          ...datas,
+          meridian,
+          bookingTime,
+          id,
+        };
+      }
     });
     // if (Object.entries(allInformation).length > 2) {
     //   alert("Fill all information first please!");
