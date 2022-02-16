@@ -80,6 +80,13 @@ const Form = () => {
         }
       });
 
+      if (Object.entries(allInformation).length >= 5) {
+        refOne.current = true;
+      } else {
+        refOne.current = false;
+        alert("fill all information please");
+      }
+
       if (refOne.current === true) {
         return {
           ...prev,

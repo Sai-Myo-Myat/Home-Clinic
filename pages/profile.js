@@ -7,10 +7,10 @@ import BookingCard from "../components/bookingCard";
 const Profile = () => {
   const [database, setDatabase] = useContext(mainContextProvider);
   const [allInformation, setAllInformation] = useContext(contextProvider);
-  console.log(database);
+  console.log("database", database);
 
   useEffect(() => {
-    if (Object.entries(allInformation).length > 4) {
+    if (allInformation && Object.entries(allInformation).length > 5) {
       setDatabase((prev) => [...prev, allInformation]);
     } else {
       alert("Fill all information please");
