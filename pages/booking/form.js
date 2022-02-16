@@ -60,21 +60,31 @@ const Form = () => {
       const bookingTime = new Date(year, month - 1, day, hour, minute);
 
       const currentTime = new Date();
+      currentTime.setHours(currentTime.getHours() + 1);
       if (bookingTime.getTime() < currentTime.getTime()) {
-        alert("it's now ");
+        alert("You have to make a booking 1 hour in advance");
+        refOne.current = false;
         return allInformation;
+      } else {
+        refOne.current = true;
       }
 
       setBookingTimes((prev) => [...prev, bookingTime]);
       console.log("bookingTimes", bookingTimes);
 
       bookingTimes.map((booking) => {
-        // const extraMinutes = booking;
-        // extraMinutes.setMinutes(extraMinutes.getMinutes() + 10);
         if (booking.getTime() === bookingTime.getTime()) {
           alert("this time is not available!");
           refOne.current = false;
           setAllInformation(allInformation);
+        } else if (
+          bookingTime.getTime() <
+            booking.setMinutes(booking.getMinutes() + 5) ||
+          bookingTime.getTime() > booking.setMinutes(booking.getMinutes() - 5)
+        ) {
+          alert("This is a duration of other's booking.");
+          refOne.current = false;
+          return;
         } else {
           refOne.current = true;
         }
