@@ -164,7 +164,7 @@ const Form = () => {
         <button
           type="submit"
           onClick={handleSubmit}
-          className="btn btn-primary mt-5"
+          className="p-2 rounded-lg mt-5 bg-[#FFBBBB] text-[#BFFFF0]"
         >
           Submit
         </button>

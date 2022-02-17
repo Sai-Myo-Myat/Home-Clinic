@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { motion } from "framer-motion";
 //importing components
 import { contextProvider } from "../components/context";
 import { mainContextProvider } from "../components/dataBase";
@@ -19,12 +20,16 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="bg-blue-500 w-[80%] overflow-auto h-100 position-absolute p-2 right-0">
+    <motion.div
+      animate={{ width: "50vw", padding: "5px" }}
+      initial={{ width: 0, padding: 0 }}
+      className="bg-[#BFFFF0] overflow-auto h-100 position-absolute right-0"
+    >
       {database.length > 0 &&
         database.map((booking, index) => (
           <BookingCard booking={booking} key={index} id={index} />
         ))}
-    </div>
+    </motion.div>
   );
 };
 

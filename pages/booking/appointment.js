@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useContext, useReducer, useState } from "react";
+import { motion } from "framer-motion";
 //importing components
 import { contextProvider } from "../../components/context";
 
@@ -39,24 +40,26 @@ const Appointment = () => {
   };
 
   return (
-    <div className="text-stone-100 h-full flex-col flex items-center py-6">
+    <div className="text-stone-100 text-[#FFBBBB]  h-full flex-col flex items-center py-6">
       <div>
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold ">
           What is your Health Problem and Who do you want to meet?
         </h1>
       </div>
       <div className="w-50 h-50 flex items-center justify-around">
         {types.map((type, index) => (
           <div
-            className="position-relative"
+            className="position-relative "
             key={index}
             onClick={() => {
               dispatch({ change: "change", id: type.id });
             }}
           >
             <div
-              className={`cursor-pointer text-blue-500 p-2 rounded ${
-                type.select ? "bg-blue-500 text-white" : "bg-blue-200 "
+              className={`cursor-pointer text-blue-500  p-2 rounded ${
+                type.select
+                  ? "bg-[#BFFFF0] text-[#FFBBBB] "
+                  : "bg-[#FFBBBB] text-[#BFFFF0]"
               }`}
             >
               <h3>{type.name}</h3>
@@ -67,7 +70,7 @@ const Appointment = () => {
       <Link href="/booking/form" passHref>
         <button
           onClick={handleType}
-          className="text-blue-500 font-bold text-2xl rounded mt-20 "
+          className="text-[#FFBBBB] font-bold text-2xl rounded mt-20 "
         >
           next➯
         </button>

@@ -1,6 +1,6 @@
 const Main = (props) => {
   return (
-    <div className="h-[90vh] bg-blue-300 position-relative">
+    <div className="h-[90vh] bg-[F0FFC2] position-relative">
       {props.children}
     </div>
   );

@@ -4,12 +4,11 @@ import { useContext } from "react";
 import { contextProvider } from "./context";
 
 const Nav = () => {
-  const [allInformation, setAllInformation, number, setNumber] =
-    useContext(contextProvider);
+  const [allInformation, setAllInformation] = useContext(contextProvider);
   return (
-    <nav className="bg-blue-500 text-white flex justify-between border-box ">
+    <nav className="bg-[#BFFFF0] text-[#FFBBBB] flex justify-between border-box ">
       <Link href="/" passHref>
-        <h1 className="p-3 text-xl m-0 cursor-pointer">Home</h1>
+        <h1 className="p-3 text-2xl m-0 cursor-pointer">Home</h1>
       </Link>
       <ul className=" flex justify-around items-center w-50 py-3 p-0 m-0 ">
         <li className=" m-0 cursor-pointer"> Q&A</li>
