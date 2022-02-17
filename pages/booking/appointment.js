@@ -39,6 +39,16 @@ const Appointment = () => {
     });
   };
 
+  const parentVariant = {
+    hidden: {
+      opacity: 0,
+    },
+    visiable: {
+      opacity: 1,
+      backgroundColor: "red",
+    },
+  };
+
   return (
     <div className="text-stone-100 text-[#FFBBBB]  h-full flex-col flex items-center py-6">
       <div>
@@ -48,14 +58,15 @@ const Appointment = () => {
       </div>
       <div className="w-50 h-50 flex items-center justify-around">
         {types.map((type, index) => (
-          <div
+          <motion.div
+            variants={parentVariant}
             className="position-relative "
             key={index}
             onClick={() => {
               dispatch({ change: "change", id: type.id });
             }}
           >
-            <div
+            <motion.div
               className={`cursor-pointer text-blue-500  p-2 rounded ${
                 type.select
                   ? "bg-[#BFFFF0] text-[#FFBBBB] "
@@ -63,8 +74,8 @@ const Appointment = () => {
               }`}
             >
               <h3>{type.name}</h3>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         ))}
       </div>
       <Link href="/booking/form" passHref>

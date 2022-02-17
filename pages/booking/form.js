@@ -69,18 +69,17 @@ const Form = () => {
         refOne.current = true;
       }
 
-      setBookingTimes((prev) => [...prev, bookingTime]);
-      console.log("bookingTimes", bookingTimes);
-
       bookingTimes.map((booking) => {
-        if (booking.getTime() === bookingTime.getTime()) {
-          alert("this time is not available!");
-          refOne.current = false;
-          setAllInformation(allInformation);
-        } else if (
+        // if (booking.getTime() === bookingTime.getTime()) {
+        //   alert("this time is not available!");
+        //   refOne.current = false;
+        //   setAllInformation(allInformation);
+        //   return;
+        // } else
+        if (
+          booking.setMinutes(booking.getMinutes() - 5) <
           bookingTime.getTime() <
-            booking.setMinutes(booking.getMinutes() + 5) ||
-          bookingTime.getTime() > booking.setMinutes(booking.getMinutes() - 5)
+          booking.setMinutes(booking.getMinutes() + 5)
         ) {
           alert("This is a duration of other's booking.");
           refOne.current = false;
@@ -89,6 +88,11 @@ const Form = () => {
           refOne.current = true;
         }
       });
+
+      if (refOne.current === true) {
+        setBookingTimes((prev) => [...prev, bookingTime]);
+        console.log("bookingTimes", bookingTimes);
+      }
 
       // if (Object.entries(allInformation).length >= 5) {
       //   refOne.current = true;
