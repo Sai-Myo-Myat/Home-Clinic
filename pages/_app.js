@@ -1,5 +1,7 @@
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+
 //importing Layout
 import Layout from "../components/layout";
 
