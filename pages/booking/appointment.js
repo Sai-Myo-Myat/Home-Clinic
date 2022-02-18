@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useContext, useReducer, useState } from "react";
+import { useContext, useReducer, useRef, useState } from "react";
 import { motion } from "framer-motion";
 //importing components
 import { contextProvider } from "../../components/context";
@@ -30,13 +30,18 @@ const reducer = (state, action) => {
 const Appointment = () => {
   const [types, dispatch] = useReducer(reducer, initialTypes);
   const [allInformation, setAllInformation] = useContext(contextProvider);
+  const refTwo = useRef(false);
 
   const handleType = () => {
-    types.map((type) => {
-      if (type.select === true) {
-        setAllInformation((prev) => ({ ...prev, type: type.name }));
-      }
-    });
+    if (refTwo.current) {
+      types.map((type) => {
+        if (type.select === true) {
+          setAllInformation((prev) => ({ ...prev, type: type.name }));
+        }
+      });
+    } else {
+      alert("choose one");
+    }
   };
 
   const parentVariant = {
@@ -61,7 +66,7 @@ const Appointment = () => {
     visiable: {
       opacity: 1,
       y: 0,
-      staggerChildren: 0.3,
+      staggerChildren: 0.15,
     },
   };
 
@@ -86,9 +91,12 @@ const Appointment = () => {
         {types.map((type, index) => (
           <motion.div
             variants={childrenVariant}
+            // animate="visiable"
+            // initial="hidden"
             className="position-relative "
             key={index}
             onClick={() => {
+              refTwo.current = true;
               dispatch({ change: "change", id: type.id });
             }}
           >
@@ -104,7 +112,7 @@ const Appointment = () => {
           </motion.div>
         ))}
       </motion.div>
-      <Link href="/booking/form" passHref>
+      <Link href={`${refTwo.current ? "/booking/form" : ""}`} passHref>
         <button
           onClick={handleType}
           className="text-[#FFBBBB] font-bold text-2xl rounded mt-20 "

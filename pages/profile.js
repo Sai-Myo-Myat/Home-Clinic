@@ -13,9 +13,10 @@ const Profile = () => {
   useEffect(() => {
     if (allInformation && Object.entries(allInformation).length > 5) {
       setDatabase((prev) => [...prev, allInformation]);
-    } else {
-      alert("Fill all information please");
     }
+    // else {
+    //   alert("Fill all information please");
+    // }
     setAllInformation({});
   }, []);
 

@@ -121,6 +121,7 @@ const Form = () => {
 
   return (
     <div className="h-full flex justify-center flex-col items-center">
+      <h1>Please be sure to fill all information</h1>
       <form className="w-50">
         <div className="form-group mb-3 text-white">
           <label htmlFor="exampleInputEmail1 ">Name</label>
