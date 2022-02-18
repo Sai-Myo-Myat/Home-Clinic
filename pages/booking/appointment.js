@@ -47,12 +47,13 @@ const Appointment = () => {
   const parentVariant = {
     hidden: {
       opacity: 0,
+      y: 100,
     },
     visiable: {
       opacity: 1,
+      y: 0,
       transition: {
-        type: "tweet",
-        duration: 1,
+        staggerChildren: 0.15,
         when: "beforeChildren",
       },
     },
@@ -66,7 +67,6 @@ const Appointment = () => {
     visiable: {
       opacity: 1,
       y: 0,
-      staggerChildren: 0.15,
     },
   };
 
@@ -82,43 +82,46 @@ const Appointment = () => {
           What is your Health Problem and Who do you want to meet?
         </motion.h1>
       </div>
-      <motion.div
-        variants={parentVariant}
-        animate="visiable"
-        initial="hidden"
-        className="w-50 h-50 flex items-center justify-around"
-      >
-        {types.map((type, index) => (
-          <motion.div
-            variants={childrenVariant}
-            // animate="visiable"
-            // initial="hidden"
-            className="position-relative "
-            key={index}
-            onClick={() => {
-              refTwo.current = true;
-              dispatch({ change: "change", id: type.id });
-            }}
-          >
+      {types && (
+        <motion.div
+          variants={parentVariant}
+          animate="visiable"
+          initial="hidden"
+          className="w-50 h-50 flex items-center justify-around"
+        >
+          {types.map((type, index) => (
             <motion.div
-              className={`cursor-pointer text-blue-500  p-2 rounded ${
-                type.select
-                  ? "bg-[#BFFFF0] text-[#FFBBBB] "
-                  : "bg-[#FFBBBB] text-[#BFFFF0]"
-              }`}
+              className="position-relative"
+              key={index}
+              onClick={() => {
+                refTwo.current = true;
+                dispatch({ change: "change", id: type.id });
+              }}
             >
-              <h3>{type.name}</h3>
+              <motion.div
+                variants={childrenVariant}
+                className={`cursor-pointer p-2 rounded ${
+                  type.select
+                    ? "bg-[#BFFFF0] text-[#FFBBBB] "
+                    : "bg-[#FFBBBB] text-[#BFFFB9]"
+                }`}
+              >
+                <h3>{type.name}</h3>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        ))}
-      </motion.div>
+          ))}
+        </motion.div>
+      )}
       <Link href={`${refTwo.current ? "/booking/form" : ""}`} passHref>
-        <button
+        <motion.button
+          variants={parentVariant}
+          animate="visiable"
+          initial="hidden"
           onClick={handleType}
           className="text-[#FFBBBB] font-bold text-2xl rounded mt-20 "
         >
           next➯
-        </button>
+        </motion.button>
       </Link>
     </div>
   );

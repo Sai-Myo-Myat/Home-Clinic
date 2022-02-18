@@ -1,5 +1,6 @@
 import { useReducer, useContext, useRef } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 //importing components
 import { mainContextProvider } from "../../components/dataBase";
 import { contextProvider } from "../../components/context";
@@ -24,6 +25,22 @@ const Form = () => {
   const [datas, dispatch] = useReducer(reducer, initialDatas);
   const refOne = useRef(true);
 
+  const variantOne = {
+    hidden: {
+      x: "-100vw",
+    },
+    show: {
+      x: 0,
+      transition: {
+        type: "tweet",
+        duration: 1,
+      },
+    },
+    exit: {
+      x: "-100vw",
+    },
+  };
+
   const makeChange = (e) => {
     dispatch({
       type: "change",
@@ -32,7 +49,6 @@ const Form = () => {
     });
   };
   const handleSubmit = (e) => {
-    // e.preventDefault();
     const id = Math.random() + 1;
     setAllInformation((prev) => {
       if (datas.time) {
@@ -41,7 +57,6 @@ const Form = () => {
 
         const [hour, minute] = hourAndMinute;
         console.log("hour:", hour, "minutes", minute);
-        //minute < 10 ? (minute = minute[1]) : minute; //to be appear correctly
         const dates = datas.date.split("-");
         const [year, month, day] = dates;
         console.log("dates", dates);
@@ -114,17 +129,22 @@ const Form = () => {
         };
       }
     });
-    // if (Object.entries(allInformation).length > 2) {
-    //   alert("Fill all information first please!");
-    // }
   };
 
   return (
-    <div className="h-full flex justify-center flex-col items-center">
-      <h1>Please be sure to fill all information</h1>
-      <form className="w-50">
+    <motion.div
+      variants={variantOne}
+      animate="show"
+      initial="hidden"
+      exit={{ x: "-100vw" }}
+      className="flex justify-center items-center flex-col p-10"
+    >
+      <h1 className="text-[#FFBBBB]">Please be sure to fill all information</h1>
+      <form id="form" className="w-50" action="#" method="#">
         <div className="form-group mb-3 text-white">
-          <label htmlFor="exampleInputEmail1 ">Name</label>
+          <label className="text-[#FFBBBB]" htmlFor="exampleInputEmail1 ">
+            Name
+          </label>
           <input
             required
             type="text"
@@ -137,7 +157,9 @@ const Form = () => {
           />
         </div>
         <div className="form-group mb-3 text-white">
-          <label htmlFor="exampleInputPassword1">Phone-number</label>
+          <label className="text-[#FFBBBB]" htmlFor="exampleInputPassword1">
+            Phone-number
+          </label>
           <input
             required
             type="number"
@@ -149,7 +171,9 @@ const Form = () => {
           />
         </div>
         <div className="form-group mb-3 text-white">
-          <label htmlFor="exampleInputDate">Date</label>
+          <label className="text-[#FFBBBB]" htmlFor="exampleInputDate">
+            Date
+          </label>
           <input
             required
             type="date"
@@ -160,7 +184,9 @@ const Form = () => {
           />
         </div>
         <div className="form-group mb-3 text-white">
-          <label htmlFor="exampleInputTime">Time</label>
+          <label className="text-[#FFBBBB]" htmlFor="exampleInputTime">
+            Time
+          </label>
           <input
             required
             type="time"
@@ -180,9 +206,7 @@ const Form = () => {
           Submit
         </button>
       </Link>
-
-      {/*  */}
-    </div>
+    </motion.div>
   );
 };
 

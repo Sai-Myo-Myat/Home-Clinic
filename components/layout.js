@@ -7,7 +7,7 @@ import { BookingTimesContainer } from "./bookingTimes";
 
 const Layout = (props) => {
   return (
-    <div className="h-[100vh]">
+    <div className="h-[100vh] overflow-hidden">
       <MainContextContainer>
         <ContextContainer>
           <BookingTimesContainer>
