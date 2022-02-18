@@ -45,21 +45,47 @@ const Appointment = () => {
     },
     visiable: {
       opacity: 1,
-      backgroundColor: "red",
+      transition: {
+        type: "tweet",
+        duration: 1,
+        when: "beforeChildren",
+      },
+    },
+  };
+
+  const childrenVariant = {
+    hidden: {
+      opacity: 0,
+      y: 100,
+    },
+    visiable: {
+      opacity: 1,
+      y: 0,
+      staggerChildren: 0.3,
     },
   };
 
   return (
     <div className="text-stone-100 text-[#FFBBBB]  h-full flex-col flex items-center py-6">
       <div>
-        <h1 className="text-4xl font-bold ">
+        <motion.h1
+          variants={parentVariant}
+          animate="visiable"
+          initial="hidden"
+          className="text-4xl font-bold "
+        >
           What is your Health Problem and Who do you want to meet?
-        </h1>
+        </motion.h1>
       </div>
-      <div className="w-50 h-50 flex items-center justify-around">
+      <motion.div
+        variants={parentVariant}
+        animate="visiable"
+        initial="hidden"
+        className="w-50 h-50 flex items-center justify-around"
+      >
         {types.map((type, index) => (
           <motion.div
-            variants={parentVariant}
+            variants={childrenVariant}
             className="position-relative "
             key={index}
             onClick={() => {
@@ -77,7 +103,7 @@ const Appointment = () => {
             </motion.div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
       <Link href="/booking/form" passHref>
         <button
           onClick={handleType}

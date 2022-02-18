@@ -15,14 +15,8 @@ const Nav = () => {
         <div className={`position-relative w-10 h-10 flex items-center`}>
           {" "}
           <Link passHref href={"/profile"}>
-            <i
-              aria-hidden
-              className="cursor-pointer text-2xl text-gray-300 fas fa-user"
-            ></i>
+            <i aria-hidden className="fa-duotone fa-book"></i>
           </Link>
-          {/* <div className="w-5  h-5 flex items-center justify-center text-blue-500 position-absolute top-0 right-0 rounded-full bg-blue-200">
-            {number}
-          </div> */}
         </div>
       </ul>
     </nav>

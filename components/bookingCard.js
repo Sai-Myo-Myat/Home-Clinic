@@ -1,9 +1,11 @@
 import { useContext } from "react";
 
 import { mainContextProvider } from "./dataBase";
+import { bookingTimesContext } from "./bookingTimes";
 
 const BookingCard = ({ booking }) => {
   const [database, setDatabase] = useContext(mainContextProvider);
+  const [bookingTimes, setBookingTimes] = useContext(bookingTimesContext);
 
   const cancelFun = () => {
     const currentTime = new Date();
@@ -13,6 +15,11 @@ const BookingCard = ({ booking }) => {
       setDatabase(() => {
         return database.filter((element) => element.id !== booking.id);
       });
+      setBookingTimes(() =>
+        bookingTimes.filter(
+          (b) => b.getTime() !== booking.bookingTime.getTime()
+        )
+      );
     } else {
       alert("You have to cancel it one day in advance!");
     }

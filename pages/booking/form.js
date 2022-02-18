@@ -32,6 +32,7 @@ const Form = () => {
     });
   };
   const handleSubmit = (e) => {
+    // e.preventDefault();
     const id = Math.random() + 1;
     setAllInformation((prev) => {
       if (datas.time) {
@@ -70,23 +71,24 @@ const Form = () => {
       }
 
       bookingTimes.map((booking) => {
-        // if (booking.getTime() === bookingTime.getTime()) {
-        //   alert("this time is not available!");
-        //   refOne.current = false;
-        //   setAllInformation(allInformation);
-        //   return;
-        // } else
-        if (
-          booking.setMinutes(booking.getMinutes() - 5) <
-          bookingTime.getTime() <
-          booking.setMinutes(booking.getMinutes() + 5)
-        ) {
-          alert("This is a duration of other's booking.");
+        if (booking.getTime() === bookingTime.getTime()) {
+          alert("this time is not available!");
           refOne.current = false;
+          setAllInformation(allInformation);
           return;
         } else {
           refOne.current = true;
         }
+        //else if (
+        //   booking.setMinutes(booking.getMinutes() - 5) <
+        //   bookingTime.getTime() <
+        //   booking.setMinutes(booking.getMinutes() + 5)
+        // ) {
+        //   alert("This is a duration of other's booking.");
+        //   console.log(booking);
+        //   refOne.current = false;
+        //   return;
+        // }
       });
 
       if (refOne.current === true) {
@@ -123,6 +125,7 @@ const Form = () => {
         <div className="form-group mb-3 text-white">
           <label htmlFor="exampleInputEmail1 ">Name</label>
           <input
+            required
             type="text"
             name="name"
             className="form-control"
@@ -135,6 +138,7 @@ const Form = () => {
         <div className="form-group mb-3 text-white">
           <label htmlFor="exampleInputPassword1">Phone-number</label>
           <input
+            required
             type="number"
             name="phNo"
             className="form-control"
@@ -146,6 +150,7 @@ const Form = () => {
         <div className="form-group mb-3 text-white">
           <label htmlFor="exampleInputDate">Date</label>
           <input
+            required
             type="date"
             name="date"
             className="form-control select-none"
@@ -156,6 +161,7 @@ const Form = () => {
         <div className="form-group mb-3 text-white">
           <label htmlFor="exampleInputTime">Time</label>
           <input
+            required
             type="time"
             name="time"
             className="form-control select-none"
