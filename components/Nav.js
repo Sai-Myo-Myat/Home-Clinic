@@ -6,7 +6,7 @@ import { contextProvider } from "./context";
 const Nav = () => {
   const [allInformation, setAllInformation] = useContext(contextProvider);
   return (
-    <nav className="bg-[#BFFFF0] text-[#FFBBBB] flex justify-between border-box ">
+    <nav className="bg-[#003545] shadow-2xl z-10 text-[#FFBBBB] flex justify-between border-box ">
       <Link href="/" passHref>
         <h1 className="p-3 text-2xl m-0 cursor-pointer">Home</h1>
       </Link>

@@ -24,7 +24,7 @@ const Profile = () => {
     <motion.div
       animate={{ width: "50vw", padding: "5px" }}
       initial={{ width: 0, padding: 0 }}
-      className="bg-[#BFFFF0] overflow-auto h-100 position-absolute right-0"
+      className="bg-[#003545] overflow-auto h-100 position-absolute right-0"
     >
       {database.length > 0 &&
         database.map((booking, index) => (

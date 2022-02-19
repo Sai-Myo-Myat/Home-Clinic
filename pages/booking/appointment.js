@@ -71,13 +71,13 @@ const Appointment = () => {
   };
 
   return (
-    <div className="text-stone-100 text-[#FFBBBB]  h-full flex-col flex items-center py-6">
-      <div>
+    <div className="text-[#FFBBBB]  md:text-lg  h-full flex-col flex items-center py-6">
+      <div className="flex justify-center">
         <motion.h1
           variants={parentVariant}
           animate="visiable"
           initial="hidden"
-          className="text-4xl font-bold "
+          className="md:text-4xl font-bold text-center"
         >
           What is your Health Problem and Who do you want to meet?
         </motion.h1>
@@ -87,11 +87,11 @@ const Appointment = () => {
           variants={parentVariant}
           animate="visiable"
           initial="hidden"
-          className="w-50 h-50 flex items-center justify-around"
+          className="w-50 h-50 lg:flex items-center justify-around"
         >
           {types.map((type, index) => (
             <motion.div
-              className="position-relative"
+              className="position-relative my-10 bg-[#003545]"
               key={index}
               onClick={() => {
                 refTwo.current = true;
@@ -100,7 +100,7 @@ const Appointment = () => {
             >
               <motion.div
                 variants={childrenVariant}
-                className={`cursor-pointer p-2 rounded ${
+                className={`cursor-pointer p-1 rounded ${
                   type.select
                     ? "bg-[#BFFFF0] text-[#FFBBBB] "
                     : "bg-[#FFBBBB] text-[#BFFFB9]"

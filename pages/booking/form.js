@@ -136,12 +136,11 @@ const Form = () => {
       variants={variantOne}
       animate="show"
       initial="hidden"
-      exit={{ x: "-100vw" }}
-      className="flex justify-center items-center flex-col p-10"
+      className="flex justify-around h-full items-center flex-col md:p-10"
     >
       <h1 className="text-[#FFBBBB]">Please be sure to fill all information</h1>
       <form id="form" className="w-50" action="#" method="#">
-        <div className="form-group mb-3 text-white">
+        <div className="form-group mb-3">
           <label className="text-[#FFBBBB]" htmlFor="exampleInputEmail1 ">
             Name
           </label>
