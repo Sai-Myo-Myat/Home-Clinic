@@ -91,33 +91,22 @@ const Form = () => {
           refOne.current = false;
           setAllInformation(allInformation);
           return;
+        } else if (
+          booking.getTime() > bookingTime.getTime() &&
+          booking.setMinutes(booking.getMinutes() - 10) < bookingTime.getTime()
+        ) {
+          alert("this is the duration of other's booking");
+          refOne.current = false;
+          return;
         } else {
           refOne.current = true;
         }
-        //else if (
-        //   booking.setMinutes(booking.getMinutes() - 5) <
-        //   bookingTime.getTime() <
-        //   booking.setMinutes(booking.getMinutes() + 5)
-        // ) {
-        //   alert("This is a duration of other's booking.");
-        //   console.log(booking);
-        //   refOne.current = false;
-        //   return;
-        // }
       });
 
       if (refOne.current === true) {
         setBookingTimes((prev) => [...prev, bookingTime]);
         console.log("bookingTimes", bookingTimes);
       }
-
-      // if (Object.entries(allInformation).length >= 5) {
-      //   refOne.current = true;
-      // } else {
-      //   refOne.current = false;
-      //   console.log("length", Object.entries(allInformation).length);
-      //   alert("fill all information please");
-      // }
 
       if (refOne.current === true) {
         return {

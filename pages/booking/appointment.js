@@ -87,7 +87,7 @@ const Appointment = () => {
           variants={parentVariant}
           animate="visiable"
           initial="hidden"
-          className="w-50 h-50 lg:flex items-center justify-around"
+          className="w-50 h-50 items-center md:flex justify-around"
         >
           {types.map((type, index) => (
             <motion.div
