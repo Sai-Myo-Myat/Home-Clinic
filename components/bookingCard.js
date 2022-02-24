@@ -51,7 +51,7 @@ const BookingCard = ({ booking }) => {
         onClick={cancelFun}
         className="bg-[#FFBBBB] text-[#BFFFF0] p-1 rounded mt-1 position-absolute bottom-2 right-1"
       >
-        cancel
+        Cancel
       </button>
     </div>
   );
