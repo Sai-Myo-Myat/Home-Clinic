@@ -1,6 +1,7 @@
 import { useReducer, useContext, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
 //importing components
 import { mainContextProvider } from "../../components/dataBase";
 import { contextProvider } from "../../components/context";
@@ -24,6 +25,7 @@ const Form = () => {
   const [bookingTimes, setBookingTimes] = useContext(bookingTimesContext);
   const [datas, dispatch] = useReducer(reducer, initialDatas);
   const refOne = useRef(true);
+  const {register, handleSubmit, formState: {errors}} = useForm();
 
   const variantOne = {
     hidden: {
@@ -48,7 +50,7 @@ const Form = () => {
       name: e.target.name,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit2 = (e) => {
     const id = Math.random() + 1;
     setAllInformation((prev) => {
       if (datas.time) {
@@ -105,7 +107,7 @@ const Form = () => {
 
       if (refOne.current === true) {
         setBookingTimes((prev) => [...prev, bookingTime]);
-        console.log("bookingTimes", bookingTimes);
+        //console.log("bookingTimes", bookingTimes);
       }
 
       if (refOne.current === true) {
@@ -128,13 +130,13 @@ const Form = () => {
       className="flex justify-around h-full items-center flex-col md:p-10"
     >
       <h1 className="text-[#FFBBBB]">Please be sure to fill all information</h1>
-      <form id="form" className="w-50" action="#" method="#">
+      <form id="form" onSubmit={handleSubmit(() => {console.log("hi")})} className="w-50" action="#" method="#">
         <div className="form-group mb-3">
           <label className="text-[#FFBBBB]" htmlFor="exampleInputEmail1 ">
             Name
           </label>
           <input
-            required
+           {...register("first",{required: true})}
             type="text"
             name="name"
             className="form-control"
@@ -143,13 +145,13 @@ const Form = () => {
             placeholder="Enter name"
             onChange={makeChange}
           />
+          {errors.first && <p>It's required</p>}
         </div>
         <div className="form-group mb-3 text-white">
           <label className="text-[#FFBBBB]" htmlFor="exampleInputPassword1">
             Phone-number
           </label>
           <input
-            required
             type="number"
             name="phNo"
             className="form-control"
@@ -163,7 +165,6 @@ const Form = () => {
             Date
           </label>
           <input
-            required
             type="date"
             name="date"
             className="form-control select-none"
@@ -176,7 +177,6 @@ const Form = () => {
             Time
           </label>
           <input
-            required
             type="time"
             name="time"
             className="form-control select-none"
@@ -184,11 +184,12 @@ const Form = () => {
             onChange={makeChange}
           />
         </div>
+        <input type="submit" value="submit"/>
       </form>
       <Link passHref href={"/profile"}>
         <button
           type="submit"
-          onClick={handleSubmit}
+          onClick={handleSubmit2}
           className="p-2 rounded-lg mt-5 bg-[#FFBBBB] text-[#BFFFF0]"
         >
           Submit
